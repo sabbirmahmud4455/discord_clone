@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs/dist/bcrypt");
+const JWT = require("jsonwebtoken");
 const User = require("../../models/User");
 const Response = require('../../utils/Response');
 
@@ -18,14 +19,22 @@ const Register = async (req, res)=> {
 
 		//create user
 		const user = await User.create({
-			username,
+			username: username,
 			mail: mail.toLowerCase(),
 			password: encryptPassword
 		})
 
-		const token = 'JWT TOKEN';
+		const token = JWT.sign(
+			{
+				userId: user._id,
+				mail
+			},
+			process.env.TOKEN_KEY,
+			{
+				expiresIn: "24h",
+			}
+		);
 		
-
 		return response.created({
 			userDetails:{
 				mail: user.mail,
