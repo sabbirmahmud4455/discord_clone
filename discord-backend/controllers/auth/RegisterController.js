@@ -18,14 +18,13 @@ const Register = async (req, res)=> {
 
 		//create user
 		const user = await User.create({
-			username,
+			username: username,
 			mail: mail.toLowerCase(),
 			password: encryptPassword
 		})
 
 		const token = 'JWT TOKEN';
 		
-
 		return response.created({
 			userDetails:{
 				mail: user.mail,
