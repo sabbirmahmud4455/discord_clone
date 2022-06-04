@@ -35,6 +35,10 @@ module.exports = class {
 	  return this.response.status(409).json(data);
 	}
   
+	forbidden(data) {
+	  return this.response.status(403).json(data);
+	}
+  
 	content(data, statusCode = 200) {
 	  return this.response.status(statusCode).json(data);
 	}
