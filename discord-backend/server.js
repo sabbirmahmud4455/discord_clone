@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use('/', Router);
+app.use('/api', Router);
 
 const server = http.createServer(app);
 
