@@ -1,2 +1,4 @@
-/discord-backend/node_modules
-/discord-backend/.env
+/backend/node_modules
+/frontend/node_modules
+/backend/.env
+/frontend/.env
