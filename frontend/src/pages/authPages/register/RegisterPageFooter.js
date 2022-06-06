@@ -6,18 +6,18 @@ import { Tooltip } from '@mui/material';
 
 
 const getFormNotValidMessage = ()=>{
-	return "Enter correct e-mail address or password"
+	return "Username should contains between 3 and 20 characters and password should between 6 and 12 character also correct e-mail address should provided"
 }
 
 const getFormValidMessage = ()=>{
-	return "Press to log in"
+	return "Press to register"
 }
 
-const LoginPageFooter = ({handleLogin, isFormValid}) => {
+const RegisterPageFooter = ({handleRegister, isFormValid}) => {
 	const navigate = useNavigate();
 
 	const handlerPushToRegisterPage = ()=>{
-		return navigate('/register');
+		return navigate('/login');
 	};
 
 	return (
@@ -25,17 +25,17 @@ const LoginPageFooter = ({handleLogin, isFormValid}) => {
 			<Tooltip title={!isFormValid ? getFormNotValidMessage() : getFormValidMessage() }>
 				<div>
 					<CustomPrimaryButton
-					label="Log in"
+					label="Register Now"
 					additionalStyles={{marginTop: '30px'}}
 					disabled={!isFormValid}
-					onClick={handleLogin}
+					onClick={handleRegister}
 					/>
 				</div>
 			</Tooltip>
 			
 			<RedirectInfo 
-			text="Need an account?"
-			redirectText="Create an account"
+			text="Already have an account?"
+			redirectText="Login"
 			additionalStyles={{marginTop: '8px'}}
 			redirectHandler={handlerPushToRegisterPage}
 			/>
@@ -43,4 +43,4 @@ const LoginPageFooter = ({handleLogin, isFormValid}) => {
   	)
 }
 
-export default LoginPageFooter
+export default RegisterPageFooter
