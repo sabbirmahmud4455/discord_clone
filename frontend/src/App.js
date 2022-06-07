@@ -3,9 +3,12 @@ import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-do
 import LoginPage from './pages/authPages/login/LoginPage';
 import RegisterPage from './pages/authPages/register/RegisterPage';
 import DashboardPage from './pages/Dashboard';
+import AlertNotification from './shared/components/AlertNotification';
 
 function App() {
   return (
+    <>
+    
     <Router>
       <Routes>
 
@@ -16,6 +19,9 @@ function App() {
 
       </Routes>
     </Router>
+    <AlertNotification></AlertNotification>
+    </>
+    
   );
 }
 
