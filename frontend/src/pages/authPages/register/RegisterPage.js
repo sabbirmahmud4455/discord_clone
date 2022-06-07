@@ -4,19 +4,28 @@ import AuthBox from "../../../shared/components/AuthBox";
 import { validateRegisterForm } from "../../../shared/utils/validators";
 import RegisterPageFooter from "./RegisterPageFooter";
 import RegisterPageInput from "./RegisterPageInput";
+import { connect } from 'react-redux'
+import { getActions } from "../../../store/actions/authActions";
+import { useNavigate } from 'react-router-dom';
 
-const RegisterPage = () => {
-	 const [mail, setMail] = useState('');
-	 const [userName, setUserName] = useState('');
-	 const [password, setPassword] = useState('');
-	 const [isFormValid, setIsFormValid] = useState(false);
+const RegisterPage = ({ register }) => {
+	const navigate = useNavigate();
+	const [mail, setMail] = useState('');
+	const [userName, setUserName] = useState('');
+	const [password, setPassword] = useState('');
+	const [isFormValid, setIsFormValid] = useState(false);
 
 	useEffect(()=> {
 		setIsFormValid(validateRegisterForm( userName, mail, password))
 	}, [userName, mail, password, setIsFormValid])
 
-	const handleLogin = () => {
-		console.log('register');
+	const handleRegister = () => {
+		const userDetails = {
+			username: userName,
+			mail,
+			password
+		}
+		register(userDetails, navigate)
 	}
 	
 	return (
@@ -36,11 +45,17 @@ const RegisterPage = () => {
 				
 				/>
 
-				<RegisterPageFooter isFormValid={isFormValid} handleLogin={handleLogin} />
+				<RegisterPageFooter isFormValid={isFormValid} handleRegister={handleRegister} />
 			</AuthBox>
 		</>
 
 )
 }
 
-export default RegisterPage;
+const mapActionsToProps = (dispatch) => {
+	return {
+		...getActions(dispatch)
+	}
+}
+
+export default connect(null, mapActionsToProps)(RegisterPage);
