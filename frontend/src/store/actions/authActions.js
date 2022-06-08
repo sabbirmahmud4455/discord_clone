@@ -8,7 +8,7 @@ export const authActions = {
 export const getActions = (dispatch) => {
 
 	return {
-		login: (userDetails, history) => dispatch(login(userDetails, history)),
+		login: (userDetails, history) => dispatch(login(userDetails, history)), 
 		register: (userDetails, history) => dispatch(register(userDetails, history))
 	}
 }
@@ -25,7 +25,8 @@ const login = (userDetails, history) => {
 		const response = await api.login(userDetails);
 
 		if (response.error) {
-			dispatch((openAlertMessage(response?.message)))	
+			const message = response.message ? JSON.stringify(response.message) : '';
+			dispatch((openAlertMessage(message)))	
 		} else {
 			const { userDetails } = response?.data;
 
@@ -33,7 +34,6 @@ const login = (userDetails, history) => {
 			dispatch(setUserDetails(userDetails));
 			history('/dashboard')
 		}
-		
 	}
 }
 
@@ -42,15 +42,14 @@ const register = (userDetails, history) => {
 		const response = await api.register(userDetails);
 
 		if (response.error) {
-			dispatch((openAlertMessage(response?.message)))	
+			const message = response.message ? JSON.stringify(response.message) : '';
+			dispatch((openAlertMessage(message)))	
 		} else {
 			const { userDetails } = response?.data;
 
 			localStorage.setItem("user", JSON.stringify(userDetails));
 			dispatch(setUserDetails(userDetails));
 			history('/dashboard')
-
 		}
-
-	}
+	}   
 }
