@@ -17,7 +17,7 @@ const validateUserName = (userName) => {
 	return userName && userName.length > 2 && userName.length <= 20;
 }
 
-const validateMail = (mail) => {
+export const validateMail = (mail) => {
 	const emailPattern = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	return emailPattern.test(mail)
 }
