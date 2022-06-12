@@ -1,9 +1,12 @@
 import styled from "@emotion/styled";
-import React from "react"
+import React, { useEffect } from "react"
+import { logout } from "../../shared/utils/auth";
 import AppBar from "./appBar/AppBar";
 import FriendsSideBar from "./friendsSideBar/FriendsDSideBar";
 import Messenger from "./messenger/Messenger";
 import SideBar from "./sideBar/SideBar";
+import { connect } from 'react-redux';
+import { getActions } from "../../store/actions/authActions";
 
 const Wrapper = styled('div')({
 	width: '100%',
@@ -11,7 +14,20 @@ const Wrapper = styled('div')({
 	display: 'flex'
 })
 
-const DashboardPage = () => {
+const DashboardPage = ({setUserDetails}) => {
+
+	useEffect(()=> {
+		const userDetails = localStorage.getItem('user');
+
+		if (!userDetails) {
+			logout();
+		} else {
+			setUserDetails(JSON.parse(userDetails))
+		}
+
+	}, [])
+
+
 	return (
 		<Wrapper>
 			<SideBar/>
@@ -22,4 +38,10 @@ const DashboardPage = () => {
 	)
 }
 
-export default DashboardPage;
+const mapActionsToProps = (dispatch) => {
+	return {
+		...getActions(dispatch)
+	}
+}
+
+export default connect(null, mapActionsToProps)(DashboardPage);
