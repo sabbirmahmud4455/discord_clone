@@ -3,6 +3,7 @@ const http = require('http');
 const cors = require('cors');
 const mongoose = require("mongoose");
 const Router = require("./routes/route");
+const  SocketServer = require('./socketServer')
 
 
 require('dotenv').config();
@@ -17,6 +18,7 @@ app.use(cors());
 app.use('/api', Router);
 
 const server = http.createServer(app);
+SocketServer.registerSocketServer(server)
 
 mongoose.connect(`mongodb://${process.env.MONGO_URL}`, {useNewUrlParser: true, useUnifiedTopology: true})
 	.then(()=>{
