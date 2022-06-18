@@ -24,7 +24,7 @@ const DashboardPage = ({setUserDetails}) => {
 			logout();
 		} else {
 			setUserDetails(JSON.parse(userDetails));
-			ConnectWithSocketServer(userDetails);
+			ConnectWithSocketServer(JSON.parse(userDetails));
 		}
 
 	}, [])
