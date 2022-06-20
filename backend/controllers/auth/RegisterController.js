@@ -4,7 +4,6 @@ const User = require("../../models/User");
 const Response = require('../../utils/Response');
 
 const Register = async (req, res)=> {
-	console.log(req);
 	const response = new Response(res);
 	try {
 		

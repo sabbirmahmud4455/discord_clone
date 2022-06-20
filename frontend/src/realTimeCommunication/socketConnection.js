@@ -6,7 +6,6 @@ export const ConnectWithSocketServer = (userDetails) => {
 
 	const jwtToken = userDetails.token;
 
-	console.log(jwtToken);
 	socket = io('http://localhost:4000', {
 		auth: {
 			token: jwtToken,
@@ -15,6 +14,5 @@ export const ConnectWithSocketServer = (userDetails) => {
 
 	socket.on('connect', () => {
 		console.log('successfully connected with socket.io server');
-		console.log(socket.id);
 	})
 }

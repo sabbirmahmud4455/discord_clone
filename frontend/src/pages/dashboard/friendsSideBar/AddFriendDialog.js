@@ -16,7 +16,7 @@ const AddFriendDialog = ({
 	const [mail, setMail] = useState();
 	const [isFormValid, setIsFormValid] = useState();
 
-	const handleSendInvitation = () => {		
+	const handleSendInvitation = () => {
 		sendFriendInvitation({
 			mail: mail,
 		})
@@ -54,7 +54,7 @@ const AddFriendDialog = ({
 			</DialogContent>
 			<DialogActions>
 				<CustomPrimaryButton
-					onClock = {handleSendInvitation()}
+					onClick = {handleSendInvitation}
 					disabled = {!isFormValid}
 					label= "Send"
 					addiTionalStyle = {{
