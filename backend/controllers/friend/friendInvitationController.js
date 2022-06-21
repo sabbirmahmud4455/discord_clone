@@ -1,6 +1,6 @@
 
 const user = require('../../models/User');
-// const friendInvitation = require('../../models/friend/friendInvitation');
+const friendInvitation = require('../../models/friend/friendInvitation');
 
 const posInvite = async (req, res) => {
 	const { targetMailAddress } = req.body;
@@ -39,7 +39,16 @@ const posInvite = async (req, res) => {
 		res.status(409).send('Friend already added. Please check friends list');
 	}
 
-	return res.send(`controller is working for ${targetMailAddress}`);
+	//create new invitation
+	const newInvitation = await friendInvitation.create({
+		senderId: userId,
+		receiverId: targetUser._id
+	})
+
+
+	//if invitation has been successfully created we would like to update friends invitations
+
+	return res.status(201).send('Invitation has been sent');
 
 }
 
