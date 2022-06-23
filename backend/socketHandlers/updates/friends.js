@@ -1,10 +1,11 @@
 const User = require('../../models/User');
-const FriendInvitation = require('../../models/friend/friendInvitation');
+const friendInvitation = require('../../models/friend/friendInvitation');
 const serverStore = require('../../serverStore');
 
 const updateFriendsPendingInvitations = async (userId) => {
+
 	try {
-		const pendingInvitations = await FriendInvitation.find({
+		const pendingInvitations = await friendInvitation.find({
 			receiverId: userId
 		}).populate('senderId', '_id username mail');
 
@@ -13,7 +14,7 @@ const updateFriendsPendingInvitations = async (userId) => {
 
 		const io = serverStore.getSocketServerInstance();
 
-		receiverList.forEach(receiverSocketId => {
+		receiverList.forEach((receiverSocketId) => {
 			io.to(receiverSocketId).emit('friends-invitations', {
 				pendingInvitations: pendingInvitations ? pendingInvitations : [],
 			})

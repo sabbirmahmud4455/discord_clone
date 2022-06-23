@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import PendingInvitationsListItems from './PendingInvitationsListItems'
+import { connect } from 'react-redux';
+import { pendingFriendsInvitations } from '../../../../store/actions/friendsActions';
 
 
 const DUMMY_INVITATIONS = [
@@ -30,10 +32,10 @@ const MainContainer = styled('div')({
 
 })
 
-const PendingInvitationsList = () => {
+const PendingInvitationsList = ({ pendingFriendsInvitations }) => {
   return (
 	<MainContainer>
-		{DUMMY_INVITATIONS.map(invitation => (
+		{pendingFriendsInvitations.map(invitation => (
 			<PendingInvitationsListItems
 				key={invitation._id}
 				id={invitation._id}
@@ -45,4 +47,10 @@ const PendingInvitationsList = () => {
   )
 }
 
-export default PendingInvitationsList 
+const mapStoreStateToProps = ({ friends }) => {
+	return {
+		...friends,
+	}
+}
+
+export default connect(mapStoreStateToProps) (PendingInvitationsList)

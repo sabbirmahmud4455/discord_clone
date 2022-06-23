@@ -1,6 +1,7 @@
 
-const user = require('../../models/User');
+const User = require('../../models/User');
 const friendInvitation = require('../../models/friend/friendInvitation');
+const { updateFriendsPendingInvitations } = require('../../socketHandlers/updates/friends')
 
 const posInvite = async (req, res) => {
 	const { targetMailAddress } = req.body;
@@ -12,7 +13,7 @@ const posInvite = async (req, res) => {
 		return res.status(409).send('Sorry. You cannot become friend with yourself')
 	}
 
-	const targetUser = await user.findOne({
+	const targetUser = await User.findOne({
 		mail: targetMailAddress.toLowerCase()
 	})
 
@@ -47,6 +48,9 @@ const posInvite = async (req, res) => {
 
 
 	//if invitation has been successfully created we would like to update friends invitations
+
+	//send pending invitations update to specific user 
+	updateFriendsPendingInvitations(targetUser._id.toString());
 
 	return res.status(201).send('Invitation has been sent');
 
