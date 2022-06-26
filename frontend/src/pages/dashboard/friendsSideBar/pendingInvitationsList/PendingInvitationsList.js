@@ -3,24 +3,6 @@ import React from 'react'
 import PendingInvitationsListItems from './PendingInvitationsListItems'
 import { connect } from 'react-redux';
 
-
-const DUMMY_INVITATIONS = [
-	{
-		_id: 1,
-		senderId: {
-			userName: 'john daa',
-			mail: 'johndaa@mail.com'
-		}
-	},
-	{
-		_id: 2,
-		senderId: {
-			userName: 'Junkeer',
-			mail: 'Junkeer@mail.com'
-		}
-	},
-]
-
 const MainContainer = styled('div')({
 	width: "100%",
 	height: "22%",
