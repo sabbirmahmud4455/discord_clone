@@ -2,7 +2,6 @@ import styled from '@emotion/styled'
 import React from 'react'
 import PendingInvitationsListItems from './PendingInvitationsListItems'
 import { connect } from 'react-redux';
-import { pendingFriendsInvitations } from '../../../../store/actions/friendsActions';
 
 
 const DUMMY_INVITATIONS = [
@@ -39,7 +38,7 @@ const PendingInvitationsList = ({ pendingFriendsInvitations }) => {
 			<PendingInvitationsListItems
 				key={invitation._id}
 				id={invitation._id}
-				userName= {invitation.senderId.userName}
+				userName= {invitation.senderId.username}
 				userMail= {invitation.senderId.mail}
 			/>
 		))}
