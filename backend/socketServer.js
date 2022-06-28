@@ -11,7 +11,13 @@ const registerSocketServer = (server) => {
 		}
 	});
 
-	serverStore.setSocketServerInstance(io)
+	serverStore.setSocketServerInstance(io);
+
+	const emitOnlineUsers = () => {
+		const onlineUsers = serverStore.getOnlineUsers();
+		io.emit('online-users', {onlineUsers})
+
+	}
 
 	io.use((socket, next) => {
 		authSocket(socket, next)
@@ -19,10 +25,16 @@ const registerSocketServer = (server) => {
 
 	io.on('connection', (socket) => {
 		newConnectionHandler(socket, io);
+		emitOnlineUsers();
+
 		socket.on('disconnect', () => {
 			disconnectDandler(socket);
 		})
-	})
+	});
+	
+	setInterval(() => {
+		emitOnlineUsers()
+	}, [1000 * 30]);
 
 }
 
