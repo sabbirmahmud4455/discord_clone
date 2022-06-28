@@ -1,7 +1,7 @@
 
 const User = require('../../models/User');
 const friendInvitation = require('../../models/friend/friendInvitation');
-const { updateFriendsPendingInvitations } = require('../../socketHandlers/updates/friends')
+const FriendsUpdate = require('../../socketHandlers/updates/friends')
 
 const postInvite = async (req, res) => {
 	const { targetMailAddress } = req.body;
@@ -50,7 +50,7 @@ const postInvite = async (req, res) => {
 	//if invitation has been successfully created we would like to update friends invitations
 
 	//send pending invitations update to specific user 
-	updateFriendsPendingInvitations(targetUser._id.toString());
+	FriendsUpdate.updateFriendsPendingInvitations(targetUser._id.toString());
 
 	return res.status(201).send('Invitation has been sent');
 
@@ -91,12 +91,13 @@ const postAcceptInvite = async (req, res) => {
 		});
 
 		//update list of the friends if the users are online
+		FriendsUpdate.updateFriends(receiverId.toString());
+		FriendsUpdate.updateFriends(senderId.toString());
 
 		//update pending invitation
-		updateFriendsPendingInvitations(receiverId.toString());
-		updateFriendsPendingInvitations(senderId.toString());
+		FriendsUpdate.updateFriendsPendingInvitations(receiverId.toString());
+		FriendsUpdate.updateFriendsPendingInvitations(senderId.toString());
 
-		frie
 
 		return res.status(200).send('Invitation successfully added')
 
@@ -118,7 +119,7 @@ const postRejectInvite = async (req, res) => {
 		}
 
 		//update pending invitation
-		updateFriendsPendingInvitations(userId);
+		FriendsUpdate.updateFriendsPendingInvitations(userId);
 
 		return res.status(200).send('Invitation successfully rejected')
 

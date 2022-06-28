@@ -1,42 +1,17 @@
 import styled from '@emotion/styled'
 import React from 'react'
+import { connect } from 'react-redux'
 import FriendsListItem from './FriendsListItem'
-
-
-
-const DUMMY_FRIENDS = [
-	{
-		id: 1,
-		username: 'anna',
-		isOnline: true,
-	},
-	{
-		id: 2,
-		username: 'jon',
-		isOnline: false,
-	},
-	{
-		id: 3,
-		username: 'jesrun',
-		isOnline: false,
-	},
-	{
-		id: 1,
-		username: 'mary',
-		isOnline: false,
-	},
-]
-
 
 const MainContainer = styled('div')({
 	flexGrow: 1,
 	width: "100%",
 })
 
-const FriendsList = () => {
+const FriendsList = ({friends}) => {
   return (
 	<MainContainer>
-		{DUMMY_FRIENDS.map(friend => (
+		{friends.map(friend => (
 			<FriendsListItem 
 				userName= {friend.username}
 				id= {friend.id}
@@ -50,4 +25,10 @@ const FriendsList = () => {
   )
 }
 
-export default FriendsList
+const getStoreToProps = ({friends}) => {
+	return {
+		...friends,
+	}
+}
+
+export default connect(getStoreToProps)(FriendsList)

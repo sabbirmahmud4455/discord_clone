@@ -18,6 +18,7 @@ export const getActions = (dispatch) => {
 		rejectFriendInvitation: (data) => {
 			dispatch(rejectFriendInvitation(data));
 		},
+
 	}
 }
 
@@ -27,6 +28,14 @@ export const setPendingFriendsInvitations = (pendingFriendsInvitations) => {
 		pendingFriendsInvitations,
 	}
 }
+
+export const setFriends = (friends) => {
+	return {
+		type: friendsActions.SET_FRIENDS,
+		friends
+	}
+}
+
 
 const sendFriendInvitation = (data, closeDialogHandler) => {
 	return async (dispatch) => {
