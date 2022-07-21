@@ -20,7 +20,7 @@ const MessengerContent = ({chosenChatDetails}) => {
   return (
 	<Wrapper>
 		<Messages/>
-		<NewMessageInput/>
+		<NewMessageInput chosenChatDetails={chosenChatDetails}/>
 	</Wrapper>
   )
 }
