@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const User = require('./User');
+const Message = require('./message');
 
 const Schema = mongoose.Schema;
 
@@ -6,13 +8,13 @@ const conversationsSchema = new Schema({
 	participants: [
 		{
 			type: Schema.Types.ObjectId,
-			ref: "User",
+			ref: User,
 		}
 	],
 	messages: [
 		{
 			type: Schema.Types.ObjectId,
-			ref: "Message"
+			ref: Message
 		}
 	]
 })
