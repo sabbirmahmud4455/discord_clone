@@ -5,15 +5,18 @@ import OnlineIndication from './OnlineIndication';
 import { chatTypes, getActions } from '../../../../store/actions/chatActions';
 import { connect } from 'react-redux';
 
-const FriendsListItem = ({userName, id, key, isOnline, setChosenChatDetails}) => {
+const FriendsListItem = ({username, id, isOnline, setChosenChatDetails}) => {
 
-	const handleChooseActonConversations = () => {
-		setChosenChatDetails({id, name:userName }, chatTypes.DIRECT)
-	}
+	const handleChooseActiveConversation = () => {
+
+		console.log('ehllo');
+
+		setChosenChatDetails({ id: id, name: username }, chatTypes.DIRECT);
+	  };
 
   return (
 	<Button
-		onClick = {handleChooseActonConversations}
+		onClick = {handleChooseActiveConversation}
 		style={{
 			width: '100%',
 			height: '42px',
@@ -26,7 +29,7 @@ const FriendsListItem = ({userName, id, key, isOnline, setChosenChatDetails}) =>
 			position: 'relative'
 		}}
 	>
-		<Avatar userName={userName} />
+		<Avatar userName={username} />
 		<Typography 
 			style={{
 				marginLeft: '7px',
@@ -36,10 +39,10 @@ const FriendsListItem = ({userName, id, key, isOnline, setChosenChatDetails}) =>
 			variant="subtitle1"
 			align='left'
 		>
-			{userName}
+			{username}
 		</Typography>
 
-		{isOnline && < OnlineIndication />}
+		{isOnline && <OnlineIndication/>}
 
 	</Button>
   )

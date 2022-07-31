@@ -7,13 +7,13 @@ const directChatHistoryHandler = async (socket, data) => {
 		const {userId} = socket.user;
 		const { receiverUserId } = data;
 
-		const conversation = Conversation.findOne({
+		const conversation = await Conversation.findOne({
 			participants: {$all: [userId, receiverUserId]},
 			type: "DIRECT",
 		})
 
 		if (conversation) {
-			chatUpdates.updateChatHistory(conversation._id.toString(), socket.id)
+			chatUpdates.updateChatHistory(conversation._id?.toString(), socket.id)
 		}
 
 

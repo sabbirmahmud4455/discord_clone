@@ -3,6 +3,7 @@ const newConnectionHandler = require('./socketHandlers/newConnectionHandler');
 const disconnectHandler = require('./socketHandlers/disconnectHandler');
 const serverStore = require('./serverStore');
 const directMessageHandler = require('./socketHandlers/directMessageHandler');
+const directChatHistoryHandler = require('./socketHandlers/directChatHistoryHandler');
 
 const registerSocketServer = (server) => {
 	const io =  require('socket.io')(server, {
@@ -43,7 +44,7 @@ const registerSocketServer = (server) => {
 	
 	setInterval(() => {
 		emitOnlineUsers()
-	}, [1000 * 30]);
+	}, [1000]);
 
 }
 

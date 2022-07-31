@@ -39,7 +39,8 @@ const Register = async (req, res)=> {
 			userDetails:{
 				mail: user.mail,
 				token: token,
-				userName: user.username
+				userName: user.username,
+				_id: user._id
 			}
 		})
 

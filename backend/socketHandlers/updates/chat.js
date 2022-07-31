@@ -1,15 +1,13 @@
-const { Model, model } = require("mongoose");
 const Conversation = require("../../models/conversation");
 const serverStore = require('../../serverStore');
-const User = require('../../models/User');
 
 const updateChatHistory = async (conversationId, toSpecifiedSocketId = null) => {
 	const conversation = await Conversation.findById(conversationId).populate({
 		path: 'messages',
-		model: "Model",
+		model: "Message",
 		populate: {
 			path: "author",
-			model: User,
+			model: "User",
 			select: 'username _id'
 		}
 	})
@@ -39,7 +37,6 @@ const updateChatHistory = async (conversationId, toSpecifiedSocketId = null) => 
 				});
 			})
 		});
-
 	}
 }
 

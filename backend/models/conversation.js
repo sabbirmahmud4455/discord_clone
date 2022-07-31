@@ -4,7 +4,7 @@ const Message = require('./message');
 
 const Schema = mongoose.Schema;
 
-const conversationsSchema = new Schema({
+const conversationSchema = new Schema({
 	participants: [
 		{
 			type: Schema.Types.ObjectId,
@@ -19,4 +19,4 @@ const conversationsSchema = new Schema({
 	]
 })
 
-module.exports = mongoose.model("Conversation", conversationsSchema)
+module.exports = mongoose.model("Conversation", conversationSchema)
