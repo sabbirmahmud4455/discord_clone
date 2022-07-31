@@ -36,13 +36,11 @@ export const ConnectWithSocketServer = (userDetails) => {
 
 	socket.on('direct-chat-history', (data) => {
 		updateDirectChatHistoryIfActive(data);
-		console.log(data);
 	})
 
 }
 
 export const sendDirectMessage = (data) => {
-	console.log(data);
 	socket.emit('direct-message', data);
 }
 

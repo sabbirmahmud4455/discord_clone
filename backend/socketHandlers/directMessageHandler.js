@@ -12,7 +12,7 @@ const directMessageHandler = async (socket, data) => {
 		//create a new message
 		const message = await Message.create({
 			content: content,
-			authorId: userId,
+			author: userId,
 			date: new Date,
 			type: "DIRECT",
 		});

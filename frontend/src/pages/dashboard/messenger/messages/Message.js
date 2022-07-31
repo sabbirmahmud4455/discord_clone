@@ -33,6 +33,7 @@ const SameAuthorMessageText = styled('span')({
 const Message = ({content, sameAuthor, username, date, sameDay}) => {
 
 
+
   if (sameAuthor && sameDay) {
 	return (
 		<SameAuthorMessageContent>

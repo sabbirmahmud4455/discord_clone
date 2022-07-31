@@ -18,11 +18,11 @@ app.use('/api', Router);
 const server = http.createServer(app);
 SocketServer.registerSocketServer(server)
 
-mongoose.connect(`mongodb://${process.env.MONGO_URL}`, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(`${process.env.MONGO_URL}`, {useNewUrlParser: true, useUnifiedTopology: true})
 	.then(()=>{
 		console.log(`mongodb connected on ${process.env.MONGO_URL}`);
-	})
 
-server.listen(PORT, ()=> {
-	console.log(`Server is listening on ${PORT}`);
-});
+		server.listen(PORT, ()=> {
+			console.log(`Server is listening on ${PORT}`);
+		});
+	})

@@ -2,8 +2,8 @@ import styled from '@emotion/styled'
 import React from 'react';
 import { connect } from 'react-redux';
 import MessagesHeader from './MessagesHeader';
-import DUMMY_MESSAGES from './DUMMY_MESSAGES.js';
 import Message from './Message';
+import moment from "moment"
 
 const MainContainer = styled('div')({
   height: 'calc(100% - 60px)',
@@ -18,15 +18,19 @@ const Messages = ({chosenChatDetails, messages}) => {
   return (
 	<MainContainer>
     <MessagesHeader name={chosenChatDetails?.name} />
-    { DUMMY_MESSAGES.map((message, index) => {
+    { messages.map((message, index) => {
+
+      const sameAuthor = index > 0 && messages[index].author._id === messages[index - 1].author._id;
+      const sameDay = index > 0 && moment(messages[index].date).format("YYYY-MM-DD") === moment(messages[index - 1].date).format("YYYY-MM-DD");
+
       return (
         <Message
           key={message._id}
           content={message.content}
           username={message.author.username}
-          sameAuthor={message.sameAuthor}
-          date={message.date}
-          sameDay={message.sameDay}
+          sameAuthor={sameAuthor}
+          date={moment(messages[index].date).format("DD-MM-YYYY")}
+          sameDay={sameDay}
         
         />
       )
