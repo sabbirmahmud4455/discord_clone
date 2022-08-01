@@ -28,7 +28,7 @@ const postInvite = async (req, res) => {
 	})
 
 	if (invitation_check) {
-		return res.status(409).send('Invitation has been already sent')
+		return res.status(409).send('Invitation has been already sent');
 	}
 
 	//check if the user which we would like to invite is already our friend
@@ -37,7 +37,7 @@ const postInvite = async (req, res) => {
 	)
 
 	if (userAlreadyOurFriend) {
-		res.status(409).send('Friend already added. Please check friends list');
+		return res.status(409).send('Friend already added. Please check friends list');
 	}
 
 	//create new invitation
@@ -46,25 +46,24 @@ const postInvite = async (req, res) => {
 		receiverId: targetUser._id
 	})
 
-
 	//if invitation has been successfully created we would like to update friends invitations
 
 	//send pending invitations update to specific user 
-	FriendsUpdate.updateFriendsPendingInvitations(targetUser._id.toString());
-
-	return res.status(201).send('Invitation has been sent');
-
+	if (newInvitation) {
+		FriendsUpdate.updateFriendsPendingInvitations(targetUser._id.toString());
+		return res.status(201).send('Invitation has been sent');
+	}
 }
 
 const postAcceptInvite = async (req, res) => {
 	try {
-		const {id } = req.body;
+		const {id} = req.body;
 		const {userId} = req.user;
 
 		const invitation = await friendInvitation.findById(id);
 		const {senderId, receiverId } = invitation;
 
-		if (!invitation && receiverId != userId) {
+		if (!invitation || receiverId != userId) {
 			return res.status(404).send('Error occurred. Please try again')
 		}
 
@@ -78,17 +77,8 @@ const postAcceptInvite = async (req, res) => {
 		await senderUser.save();
 		await receiverUser.save();
 
-
 		//delete both user invitation
-		await friendInvitation.findOneAndDelete({
-			senderId,
-			receiverId,
-		});
-
-		await friendInvitation.findOneAndDelete({
-			senderId: receiverId,
-			receiverId: senderId,
-		});
+		await friendInvitation.deleteMany({$or:[{senderId: senderId}, {senderId: receiverId}]});
 
 		//update list of the friends if the users are online
 		FriendsUpdate.updateFriends(receiverId.toString());
@@ -97,7 +87,6 @@ const postAcceptInvite = async (req, res) => {
 		//update pending invitation
 		FriendsUpdate.updateFriendsPendingInvitations(receiverId.toString());
 		FriendsUpdate.updateFriendsPendingInvitations(senderId.toString());
-
 
 		return res.status(200).send('Invitation successfully added')
 

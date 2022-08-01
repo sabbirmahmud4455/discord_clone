@@ -50,7 +50,7 @@ const Message = ({content, sameAuthor, username, date, sameDay}) => {
 		<MessageContainer>
 			<Typography style={{fontSize: '16px', color: 'white'}}>
 				{username}{' '}
-				<span style={{fontSize: '12px', color: '#7276d'}}> {date} </span>
+				<span style={{fontSize: '12px', color: '#7276d'}}> {sameDay ? date : ''} </span>
 			</Typography>
 
 			<MessageContent>{content}</MessageContent>
