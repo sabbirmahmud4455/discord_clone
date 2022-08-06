@@ -48,7 +48,7 @@ const sendFriendInvitation = (data, closeDialogHandler) => {
 		const response = await api.sendFriendInvitation(data);
 
 		if(response.error) {
-			dispatch(openAlertMessage(response.exception?.response?.data));
+			dispatch(openAlertMessage(response.exception && response.exception.response? response.exception.response.data : ''));
 		} else {
 			dispatch(openAlertMessage('Invitation has been sent!'))
 			closeDialogHandler();
@@ -61,7 +61,7 @@ const acceptFriendInvitation = (data) => {
 		const response = await api.acceptFriendInvitation(data);
 
 		if(response.error) {
-			dispatch(openAlertMessage(response.exception?.response?.data));
+			dispatch(openAlertMessage(response.exception && response.exception.response? response.exception.response.data : ''));
 		} else {
 			dispatch(openAlertMessage("Invitation accepted!"));
 		}
@@ -73,7 +73,7 @@ const rejectFriendInvitation = (data) => {
 		const response = await api.rejectFriendInvitation(data);
 
 		if(response.error) {
-			dispatch(openAlertMessage(response.exception?.response?.data));
+			dispatch(openAlertMessage(response.exception && response.exception.response?response.exception.response.data : ''));
 		} else {
 			dispatch(openAlertMessage("Invitation rejected!"));
 

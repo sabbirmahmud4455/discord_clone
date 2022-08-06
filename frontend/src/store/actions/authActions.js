@@ -29,7 +29,7 @@ const login = (userDetails, history) => {
 			const message = response.error ? response.message.response.data : '';
 			dispatch((openAlertMessage(message)))	
 		} else {
-			const { userDetails } = response?.data;
+			const { userDetails } = response? response.data : '';
 
 			localStorage.setItem("user", JSON.stringify(userDetails));
 			dispatch(setUserDetails(userDetails));
@@ -46,7 +46,7 @@ const register = (userDetails, history) => {
 			const message = response.error ? response.message.response.data : '';
 			dispatch((openAlertMessage(message)))	
 		} else {
-			const { userDetails } = response?.data;
+			const { userDetails } = response? response.data : '';
 
 			localStorage.setItem("user", JSON.stringify(userDetails));
 			dispatch(setUserDetails(userDetails));

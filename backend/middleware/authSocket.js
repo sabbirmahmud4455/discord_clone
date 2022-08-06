@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const config = process.env;
 
 const verifyTokenSocket = (socket, next) => {
-	const token = socket.handshake.auth?.token;
+	const token = socket.handshake.auth? socket.handshake.auth.token : '';
 
 	try {
 		const decoded = jwt.verify(token, config.TOKEN_KEY);

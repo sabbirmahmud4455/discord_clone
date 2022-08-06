@@ -86,7 +86,7 @@ export const rejectFriendInvitation = async (data) => {
 
 //secure routes
 const checkResponseCode = (error) => {
-	const responseCode = error?.response?.status;
+	const responseCode = error.response ? error.response.status : '';
 
 	if (responseCode) {
 		(responseCode === 401 || responseCode === 403) && logout()

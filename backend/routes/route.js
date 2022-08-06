@@ -4,6 +4,10 @@ const AuthRoute = require('./authRoute');
 const friendInvitationRoutes = require('./friendInvitationRoutes');
 const verifyToken = require("../middleware/auth")
 
+router.get('/', (req, res) => {
+	return res.send('welcome to the jungle')
+})
+
 router.use('/auth', AuthRoute)
 
 router.use('/friend-invitation', verifyToken, friendInvitationRoutes)

@@ -13,7 +13,7 @@ const directChatHistoryHandler = async (socket, data) => {
 		})
 
 		if (conversation) {
-			chatUpdates.updateChatHistory(conversation._id?.toString(), socket.id)
+			chatUpdates.updateChatHistory(conversation._id.toString(), socket.id)
 		}
 
 

@@ -20,7 +20,7 @@ const Messages = ({chosenChatDetails, messages}) => {
   const messagesEndRef = useRef(null)
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
   }
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Messages = ({chosenChatDetails, messages}) => {
   
   return (
 	<MainContainer >
-    <MessagesHeader name={chosenChatDetails?.name} />
+    <MessagesHeader name={chosenChatDetails? chosenChatDetails.name : ''} />
     { messages.map((message, index) => {
 
 
