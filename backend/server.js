@@ -18,7 +18,7 @@ app.use('/api', Router);
 const server = http.createServer(app);
 SocketServer.registerSocketServer(server)
 
-mongoose.connect(`${process.env.MONGO_URL}`, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(`mongodb://${process.env.MONGO_URL}`, {useNewUrlParser: true, useUnifiedTopology: true})
 	.then(()=>{
 		console.log(`mongodb connected on ${process.env.MONGO_URL}`);
 

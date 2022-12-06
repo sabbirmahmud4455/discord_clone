@@ -28,8 +28,7 @@ const FriendsList = ({friends, onlineUsers}) => {
 				key= {index}
 				isOnline= {friend.isOnline}
 			/>
-		))};
-		
+		))}
 		
 	</MainContainer>
   )

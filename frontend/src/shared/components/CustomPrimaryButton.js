@@ -12,8 +12,10 @@ const CustomPrimaryButton = ({label, additionalStyles, disabled, onClick}) => {
 		fontSize: '16px',
 		fontWeight: 500,
 		width: '100%',
-		height: '40px'
-
+		height: '40px',
+		"&:hover": {
+			bgcolor: '#000',
+		  },
 		}}
 		style={additionalStyles ? additionalStyles : {}}
 		disabled={disabled}
